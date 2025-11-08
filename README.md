@@ -7,19 +7,19 @@ By adjusting parameters such as noise type, graph density, and nonlinearity, thi
 ## Running the Simulation
 
 This project's main note book is:
-```sh
+```
 data_simulation_experimentation.ipynb
 ```
 
 You can run it through Jupyter Notebook:
 Then, execute each cell to generate synthetic datasets.
 Each run will automatically create a folder under:
-```sh
+```
 simulated_data
 ```
 
 Example output:
-```sh
+```
 simulated_data
 └── 20251030_231358_LinearGaussian_d5_n1000_nodes5_samples1000
       ├── LinearGaussian_d5_n1000_config.json
