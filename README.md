@@ -11,7 +11,7 @@ This project's main note book is:
 data_simulation_experimentation.ipynb
 ```
 
-You can run it through Jupyter Notebook:
+You can run it through Jupyter Notebook.
 Then, execute each cell to generate synthetic datasets.
 Each run will automatically create a folder under:
 ```
