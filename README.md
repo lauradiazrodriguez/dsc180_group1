@@ -19,10 +19,7 @@ simulated_data
 ```
 
 Example output:
-```sh
-simulated_data └──
+<pre>```markdown simulated_data └──
 20251030_231358_LinearGaussian_d5_n1000_nodes5_samples1000├──
-LinearGaussian_d5_n1000_config.json├──
-LinearGaussian_d5_n1000_data.csv└──
-LinearGaussian_d5_n1000_graph.npy
-```
+LinearGaussian_d5_n1000_config.json├──LinearGaussian_d5_n1000_data.csv└──
+LinearGaussian_d5_n1000_graph.npy```</pre>
