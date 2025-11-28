@@ -1,0 +1,20 @@
+{
+  "n_nodes": 15,
+  "n_samples": 1000,
+  "n_domains": 1,
+  "noise_type": "gaussian",
+  "function_type": "linear",
+  "node_functions": null,
+  "categorical": null,
+  "measurement_error": null,
+  "selection_bias": null,
+  "confounding": null,
+  "missing_rate": null,
+  "edge_probability": 0.5,
+  "discrete_ratio": 0.0,
+  "max_categories": 5,
+  "missing_rate_value": null,
+  "measurement_error_value": null,
+  "missing_data_desc": null,
+  "measurement_error_desc": null
+}

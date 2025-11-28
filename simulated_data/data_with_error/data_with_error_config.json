@@ -1,0 +1,26 @@
+{
+  "n_nodes": 10,
+  "n_samples": 1000,
+  "n_domains": 1,
+  "noise_type": "gaussian",
+  "function_type": "linear",
+  "node_functions": null,
+  "categorical": null,
+  "measurement_error": {
+    "X10": 0.4,
+    "X1": 0.4,
+    "X5": 0.4,
+    "X2": 0.4,
+    "X7": 0.4
+  },
+  "selection_bias": null,
+  "confounding": null,
+  "missing_rate": null,
+  "edge_probability": 0.3,
+  "discrete_ratio": 0.0,
+  "max_categories": 5,
+  "missing_rate_value": null,
+  "measurement_error_value": 0.5,
+  "missing_data_desc": null,
+  "measurement_error_desc": "The measurement error is Gaussian with a standard deviation of 0.4 on 0.5 of the columns (some are selected, some are not, except domain_index), and the measurement error is added to the original data."
+}
