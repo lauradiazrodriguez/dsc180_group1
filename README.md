@@ -8,7 +8,7 @@ By adjusting parameters such as noise type, graph density, and nonlinearity, thi
 
 This project's main notebook is:
 ```
-data_simulation_experimentation.ipynb
+generating_simulated_data.ipynb
 ```
 
 You can run it through Jupyter Notebook.
