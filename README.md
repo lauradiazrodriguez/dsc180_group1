@@ -115,7 +115,7 @@ The PC algorithm notebook will:
 
 \begin{figure}[h]  
     \centering  
-    \includegraphics[width=0.8\textwidth]{figure/DAG.png}  
+    \includegraphics[width=0.8\textwidth]{figures/DAG.png}  
     \caption{Figure 2: DAG comparison for simple linear gaussian dataset}  
     \label{fig:myimage}
 \end{figure}
