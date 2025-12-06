@@ -8,8 +8,10 @@ By adjusting parameters such as noise type, graph density, and nonlinearity, thi
 
 This project's main notebooks are:
 
+```
 generating_simulated_data.ipynb
 PC_alg.ipynb
+```
 
 
 You can run it through Jupyter Notebook.
