@@ -113,7 +113,7 @@ The PC algorithm notebook will:
 - Compute Structural Hamming Distance (SHD)
 - Compare inferred graphs against the true simulated structure
 
-![Figure 2: DAG comparison for simple linear gaussian dataset](figure/DAG.png)
+![Figure 2: DAG comparison for simple linear gaussian dataset](figures/DAG.png)
 
 ---
 
