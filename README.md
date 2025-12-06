@@ -122,3 +122,27 @@ To exit the running container:
 ```bash
 exit
 ```
+
+---
+
+# Additional Notes
+
+- This repository currently includes only the dependencies required for Quarter 1 deliverables.
+- Full LaTeX, GPU, and advanced Causal Copilot tooling will be added in future project phases.
+
+---
+
+## Acknowledgments
+
+Portions of the data simulation pipeline used in this project are adapted from the open-source implementation provided by the **Causal Copilot** research team.
+
+We acknowledge and thank the authors of the following work:
+
+**Causal-Copilot: Autonomous Causal Analysis Agent**  
+*Xinyue Wang, Kun Zhou, Wenyi Wu, Har Simrat Singh, Fang Nan, Songyao Jin, Aryan Philip, Saloni Patnaik, Hou Zhu, Shivam Singh, Parjanya Prashant, Qian Shen, Biwei Huang*  
+(2024)
+
+Their publicly released codebase supplied the foundations for our synthetic data generation module, including configurable structural equation models, graph sampling utilities, and noise distribution functions.  
+Our project extends these components for course-specific experimentation and analysis.
+
+We gratefully recognize their contributions to open causal inference research.
