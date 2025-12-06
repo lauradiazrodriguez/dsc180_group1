@@ -1,31 +1,124 @@
-# DSC180A Quarter 1 Project - Data Simulation (Causal Copilot)
+# DSC180A Quarter 1 Project — Causal Copilot: Data Simulation & Causal Discovery
 
-This project replicates and extends the **Data Simulation and Experimentation** module from the *Causal Copilot* framework.
-The goal is to reproduce the automated process for generating **synthetic causal datasets** using structural equation models with configurable graph structures, noise distributions, and function types.
-By adjusting parameters such as noise type, graph density, and nonlinearity, this project demonstrates how different data conditions affect the causal relationships within the generated datasets.
+This project replicates and extends two core components of the *Causal Copilot* framework:
 
-## Running the Simulation
+1. **Synthetic Data Simulation**  
+   Using configurable structural equation models (SEMs), we generate synthetic datasets under varying graph structures, sample sizes, noise distributions, and nonlinearity conditions. This enables controlled experimentation with causal discovery methods and highlights how data-generating assumptions impact learned causal relationships.
 
-This project's main notebooks are:
+2. **Causal Discovery via the PC Algorithm**  
+   We implement and test the **constraint-based PC algorithm** on the simulated datasets.  
+   Our work explores:
+   - Conditional independence testing  
+   - Graph skeleton recovery  
+   - Edge orientation rules  
+   - Visualization of learned causal graphs  
+   - How graph recovery quality changes under different noise levels, graph densities, and functional forms  
 
-```
-generating_simulated_data.ipynb
-PC_alg.ipynb
-```
+Together, these components form an end-to-end causal inference pipeline:
+**data generation → causal discovery → graph evaluation and visualization**.
 
+---
 
-You can run it through Jupyter Notebook.
-Then, execute each cell to generate synthetic datasets.
-Each run will automatically create a folder under:
-```
-simulated_data
-```
+## 📓 Main Notebooks Included
 
-Example output:
+### **1. generating_simulated_data.ipynb**
+Generates synthetic datasets using:
+- Linear and nonlinear SEMs  
+- Gaussian and non-Gaussian noise  
+- Adjustable graph density and variable counts  
+
+Each run creates a timestamped folder under `simulated_data/`.
+
+### **2. PC_alg.ipynb**
+Runs the **PC algorithm** from the `causal-learn` package and uses utility functions (`pc_analysis_utils.py`) to:
+- Perform conditional independence tests
+- Recover the Completed Partially Directed Acyclic Graph (CPDAG) structure
+- Visualize the output graph
+- Compute Structural Hamming Distance (SHD)
+- Compare the inferred structure to the true simulated causal graph  
+
+This notebook completes the first causal discovery component of the project.
+
+---
+
+## Example Simulation Output Directory
+
 ```
 simulated_data
 └── 20251030_231358_LinearGaussian_d5_n1000_nodes5_samples1000
       ├── LinearGaussian_d5_n1000_config.json
       ├──LinearGaussian_d5_n1000_data.csv
       └──LinearGaussian_d5_n1000_graph.npy
+```
+---
+
+# Running the Project Using Docker
+
+To ensure reproducibility, we provide a minimal Docker environment that supports the dependencies required for:
+
+- `generating_simulated_data.ipynb`
+- `PC_alg.ipynb`
+
+---
+
+## 1. Build the Docker Image
+
+From the repository root:
+
+```bash
+docker build -t causal-copilot-notebooks .
+```
+
+---
+
+## 2. Run a Container With the Project Mounted
+
+```bash
+docker run --rm -it \
+  -v "$(pwd):/workspace" \
+  -p 8888:8888 \
+  causal-copilot-notebooks
+```
+
+Then inside the container:
+
+```bash
+jupyter lab --ip=0.0.0.0 --no-browser --NotebookApp.token=''
+```
+
+Open:
+
+```
+http://localhost:8888
+```
+
+---
+
+## 3. Running the Notebooks
+
+Open and execute:
+
+```
+* generating_simulated_data.ipynb
+* PC_alg.ipynb
+```
+
+The simulation notebook will automatically create timestamped output folders under simulated_data/.
+
+The PC algorithm notebook will:
+
+- Load simulated data
+- Run the PC algorithm
+- Visualize the inferred CPDAG
+- Compute Structural Hamming Distance (SHD)
+- Compare inferred graphs against the true simulated structure
+
+---
+
+## 4. Exiting the Container
+
+To exit the running container:
+
+```bash
+exit
 ```
