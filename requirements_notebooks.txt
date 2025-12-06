@@ -1,0 +1,23 @@
+# Minimal dependencies for PC_alg.ipynb and generating_simulated_data.ipynb
+
+numpy==1.26.4
+pandas==1.5.3
+matplotlib==3.9.2
+
+# graph & viz
+networkx==3.2.1
+igraph==0.11.8
+texttable==1.7.0
+graphviz==0.20.3
+pydot==3.0.2
+
+# causal discovery
+causal-learn
+
+# scientific computing
+scipy==1.13.1
+scikit-learn==1.5.2
+
+# jupyter
+jupyterlab
+ipykernel

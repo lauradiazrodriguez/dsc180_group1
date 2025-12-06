@@ -6,10 +6,11 @@ By adjusting parameters such as noise type, graph density, and nonlinearity, thi
 
 ## Running the Simulation
 
-This project's main notebook is:
-```
+This project's main notebooks are:
+
 generating_simulated_data.ipynb
-```
+PC_alg.ipynb
+
 
 You can run it through Jupyter Notebook.
 Then, execute each cell to generate synthetic datasets.
