@@ -92,6 +92,7 @@ To ensure reproducibility, we provide a minimal Docker environment that supports
 
 - `generating_simulated_data.ipynb`
 - `PC_alg.ipynb`
+- `Financial_Domain_Specialization.ipynb`
 
 ---
 
@@ -133,11 +134,16 @@ http://localhost:8888
 Open and execute:
 
 ```
-* generating_simulated_data.ipynb
-* PC_alg.ipynb
+- generating_simulated_data.ipynb
+- PC_alg.ipynb
+- Financial_Domain_Specialization.ipynb
 ```
 
-The simulation notebook will automatically create timestamped output folders under simulated_data/.
+The simulation notebook will automatically create timestamped output folders under:
+
+```bash
+simulated_data/
+```
 
 The PC algorithm notebook will:
 
@@ -149,6 +155,18 @@ The PC algorithm notebook will:
 
 ![Figure 2: DAG comparison for simple linear gaussian dataset](figures/DAG.png)
 
+
+The PCMCI fine-tuned analysis notebook contains the primary Quarter 2 contribution: domain-specialized causal discovery on financial time-series data.
+
+It will:
+
+- Integrate real financial and macroeconomic datasets  
+- Apply the PCMCI algorithm for time-series causal discovery  
+- Tune hyperparameters such as lag depth and significance thresholds  
+- Compare discovered relationships to domain-knowledge graphs  
+- Evaluate robustness by testing predictive performance across different time segments  
+
+This notebook demonstrates how causal discovery can be adapted for real-world domains where ground truth is unknown and temporal dynamics matter.
 ---
 
 ## 4. Exiting the Container
@@ -172,27 +190,66 @@ exit
 
 The environment is built on:
 
-**Base image:**
+### Base image
 - `python:3.12-slim`
 
-**System packages:**
-- `graphviz` (required for PC algorithm graph visualization)
+---
 
-**Python libraries (as pinned in requirements_notebooks.txt):**
+### System packages
+- `graphviz` (required for causal graph visualization)
+- `build-essential` (needed to compile scientific Python packages on ARM/aarch64 systems)
+
+---
+
+### Python libraries (as pinned in `requirements_notebooks.txt`)
+
+#### Core scientific stack
 - `numpy==1.26.4`
 - `pandas==1.5.3`
-- `matplotlib==3.9.2`
 - `scipy==1.13.1`
 - `scikit-learn==1.5.2`
+- `statsmodels` (ADF tests & time-series utilities)
+
+---
+
+#### Visualization
+- `matplotlib==3.9.2`
+- `seaborn` (used in financial analysis notebook)
+
+---
+
+#### Graph & causal discovery
+- `causal-learn` (PC algorithm)
+- `tigramite` (PCMCI causal discovery)
 - `networkx==3.2.1`
 - `python-igraph==0.11.8`
 - `texttable==1.7.0` (igraph dependency)
-- `causal-learn==0.1.3.9`
+- `graphviz`
 - `pydot==3.0.2` (GraphViz wrapper)
-- `typing-extensions==4.12.2`
-- `tqdm==4.66.5`
 
-These packages are the **only** dependencies required to run the Quarter 1 deliverables.  
+---
+
+#### Financial data sources
+- `yfinance` (market data)
+- `fredapi` (FRED macroeconomic data)
+- `alpha_vantage` (FX and financial indicators)
+
+---
+
+#### Notebook environment
+- `jupyterlab`
+- `ipykernel`
+- `tqdm`
+
+---
+
+These packages are sufficient to run:
+
+- Synthetic data generation  
+- PC algorithm experiments  
+- Financial-domain PCMCI specialization and robustness testing  
+
+No additional local setup is required beyond Docker.
 
 ---
 
