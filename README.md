@@ -1,55 +1,89 @@
-# DSC180A Quarter 1 Project — Causal Copilot: Data Simulation & Causal Discovery
+# DSC180A Project — Causal Discovery in Financial Systems via Domain-Specialized PCMCI
 
-This project replicates and extends two core components of the *Causal Copilot* framework:
+This project builds on the *Causal Copilot* framework to explore how causal discovery methods behave in both controlled synthetic settings and real-world financial time-series data.
 
-1. **Synthetic Data Simulation**  
-   Using configurable structural equation models (SEMs), we generate synthetic datasets under varying graph structures, sample sizes, noise distributions, and nonlinearity conditions. This enables controlled experimentation with causal discovery methods and highlights how data-generating assumptions impact learned causal relationships.
-
-2. **Causal Discovery via the PC Algorithm**  
-   We implement and test the **constraint-based PC algorithm** on the simulated datasets.  
-   Our work explores:
-   - Conditional independence testing  
-   - Graph skeleton recovery  
-   - Edge orientation rules  
-   - Visualization of learned causal graphs  
-   - How graph recovery quality changes under different noise levels, graph densities, and functional forms  
-
-Together, these components form an end-to-end causal inference pipeline:
-**data generation → causal discovery → graph evaluation and visualization**.
+Our work evolves across two stages:
 
 ---
 
-## 📓 Main Notebooks Included
+# Quarter 1 — Simulation & Baseline Causal Discovery
 
-### **1. generating_simulated_data.ipynb**
-Generates synthetic datasets using:
-- Linear and nonlinear SEMs  
-- Gaussian and non-Gaussian noise  
-- Adjustable graph density and variable counts  
+We first developed a controlled environment for causal discovery using synthetic data. This allowed us to test how algorithms behave when the true causal structure is known.
 
-Each run creates a timestamped folder under `simulated_data/`.
+### Key components
 
-### **2. PC_alg.ipynb**
-Runs the **PC algorithm** from the `causal-learn` package and uses utility functions (`pc_analysis_utils.py`) to:
-- Perform conditional independence tests
-- Recover the Completed Partially Directed Acyclic Graph (CPDAG) structure
-- Visualize the output graph
-- Compute Structural Hamming Distance (SHD)
-- Compare the inferred structure to the true simulated causal graph  
+**1. Synthetic Data Simulation**  
+We generate datasets using structural equation models (SEMs) with configurable:
+- Graph structures  
+- Noise distributions  
+- Functional forms (linear/nonlinear)  
+- Sample sizes and densities  
 
-This notebook completes the first causal discovery component of the project.
+This enables controlled experimentation on causal discovery performance.
+
+**2. Causal Discovery via the PC Algorithm**  
+We applied the constraint-based PC algorithm to recover causal graphs from simulated data, evaluating performance using:
+- Conditional independence testing  
+- Graph recovery and orientation rules  
+- Structural Hamming Distance (SHD)  
+- Visualization of learned graphs  
+
+This stage established a baseline for how causal discovery works in idealized settings.
 
 ---
 
-## Example Simulation Output Directory
+# Quarter 2 — Financial Domain Specialization with PCMCI
 
+In Quarter 2, we moved from synthetic experiments to **real-world financial time-series data**, where causal discovery is far more challenging and impactful.
+
+We focus on **PCMCI (Peter–Clark Momentary Conditional Independence)**, a time-series extension of PC designed for temporal data.
+
+### Goals
+
+- Specialize causal discovery for the financial domain  
+- Tune PCMCI hyperparameters for improved performance  
+- Compare discovered relationships to domain knowledge  
+- Test robustness of discovered relationships over time  
+
+---
+
+## Financial Domain Analysis
+
+Implemented in:
+
+```bash
+Financial_Domain_Specialization.ipynb
 ```
-simulated_data
-└── 20251030_231358_LinearGaussian_d5_n1000_nodes5_samples1000
-      ├── LinearGaussian_d5_n1000_config.json
-      ├──LinearGaussian_d5_n1000_data.csv
-      └──LinearGaussian_d5_n1000_graph.npy
-```
+
+### What this notebook does
+
+**1. Real Financial Data Integration**
+- Macroeconomic indicators (e.g., interest rates, exchange rates)
+- Market variables
+- Multi-source financial datasets
+
+**2. PCMCI Hyperparameter Tuning**
+We systematically explore:
+- Maximum time lag  
+- Significance thresholds  
+- Independence test configurations  
+
+to identify settings that produce meaningful financial relationships.
+
+**3. Knowledge Graph Comparison**
+We compare PCMCI-discovered relationships against a domain-knowledge-based graph to evaluate plausibility.
+
+**4. Robustness Testing**
+We test whether discovered relationships remain useful when predicting on data from different time segments, evaluating temporal stability.
+
+---
+
+# Main Notebooks
+
+- `generating_simulated_data.ipynb` — synthetic data generation  
+- `PC_alg.ipynb` — baseline PC algorithm experiments  
+- `Financial_Domain_Specialization.ipynb` — financial PCMCI analysis  
+
 ---
 
 # Running the Project Using Docker

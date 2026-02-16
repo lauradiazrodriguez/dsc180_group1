@@ -1,8 +1,9 @@
-# Minimal dependencies for PC_alg.ipynb and generating_simulated_data.ipynb
+# Dependencies for PC_alg.ipynb, generating_simulated_data.ipynb, and 
 
 numpy==1.26.4
 pandas==1.5.3
 matplotlib==3.9.2
+seaborn==0.13.2
 
 # graph & viz
 networkx==3.2.1
@@ -14,9 +15,18 @@ pydot==3.0.2
 # causal discovery
 causal-learn
 
+# time-series causal discovery (Q2)
+tigramite
+
 # scientific computing
 scipy==1.13.1
+statsmodels==0.14.4
 scikit-learn==1.5.2
+
+# data sources (Q2)
+fredapi
+yfinance
+alpha-vantage
 
 # jupyter
 jupyterlab
