@@ -2,6 +2,9 @@
 
 This project builds on the *Causal Copilot* framework to explore how causal discovery methods behave in both controlled synthetic settings and real-world financial time-series data.
 
+**Project Website:**
+https://lauradiazrodriguez.github.io/dsc180_group1/
+
 Our work evolves across two stages:
 
 ---
