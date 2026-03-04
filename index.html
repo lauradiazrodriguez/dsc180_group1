@@ -4,244 +4,125 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Causal Discovery in Financial Systems</title>
-
-  <!-- Minimal, clean styling -->
-  <style>
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-      line-height: 1.6;
-      margin: 0;
-      padding: 0;
-      color: #222;
-      background-color: #ffffff;
-    }
-
-    header {
-      padding: 2rem 3rem;
-      border-bottom: 1px solid #e5e5e5;
-    }
-
-    header h1 {
-      margin: 0;
-      font-size: 2rem;
-    }
-
-    header p {
-      margin-top: 0.5rem;
-      color: #555;
-    }
-
-    main {
-      max-width: 900px;
-      margin: 0 auto;
-      padding: 2rem 3rem;
-    }
-
-    section {
-      margin-bottom: 4rem;
-    }
-
-    section h2 {
-      border-bottom: 1px solid #ddd;
-      padding-bottom: 0.3rem;
-      margin-bottom: 1rem;
-    }
-
-    nav {
-      position: fixed;
-      top: 200px;
-      right: 40px;
-      font-size: 0.9rem;
-    }
-
-    nav ul {
-      list-style: none;
-      padding: 0;
-    }
-
-    nav li {
-      margin-bottom: 0.5rem;
-    }
-
-    nav a {
-      text-decoration: none;
-      color: #0066cc;
-    }
-
-    nav a:hover {
-      text-decoration: underline;
-    }
-
-    footer {
-      text-align: center;
-      padding: 2rem;
-      border-top: 1px solid #e5e5e5;
-      color: #666;
-      font-size: 0.9rem;
-    }
-
-    @media (max-width: 1200px) {
-      nav {
-        display: none;
-      }
-    }
-  </style>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+  
+  <script type="text/javascript" src="https://unpkg.com/vis-network/standalone/umd/vis-network.min.js"></script>
+  
+  <link rel="stylesheet" href="style.css" />
 </head>
-
 <body>
 
-  <!-- Page Header -->
-  <header>
-    <h1>Causal Discovery in Financial Systems</h1>
-    <p>
-      Applying Causal Copilot and PCMCI to real-world macroeconomic and financial time series data
-    </p>
+  <header class="hero">
+    <div class="hero-content">
+      <h1>Causal Discovery in Financial Systems</h1>
+      <p class="subtitle">via Domain-Specialized PCMCI</p>
+      <div class="authors">
+        <p>David Oh, Laura Diaz Rodriguez, Yujin Lee</p>
+        <p>Advisor: Biwei Huang</p>
+        <p><em>DSC 180 Capstone Project · UC San Diego</em></p>
+      </div>
+      <div class="links">
+        <a href="https://github.com/lauradiazrodriguez/dsc180_group1" target="_blank" class="btn">View Code on GitHub</a>
+      </div>
+    </div>
   </header>
 
-  <!-- Table of Contents -->
-  <nav>
-    <ul>
-      <li><a href="#intro">Intro</a></li>
-      <li><a href="#data">Data</a></li>
-      <li><a href="#methods">Methods</a></li>
-      <li><a href="#results">Results</a></li>
-      <li><a href="#discussion">Discussion</a></li>
-      <li><a href="#conclusion">Conclusion</a></li>
-      <li><a href="#team">Meet the Team</a></li>
-    </ul>
-  </nav>
-
-  <!-- Main Content -->
-  <main>
-
-    <section id="intro">
-      <h2>Introduction</h2>
-      <p>
-        Financial markets are full of patterns. But when variables move together, it does not always mean one causes the other.
-      </p>
-      <p>
-        Stock prices, interest rates, and macroeconomic indicators often shift at the same time, sometimes because they are influenced by broader economic forces. These misleading correlations can make a model look strong on training data but unreliable in real-world use.
-      </p>
-      <p>
-        In this project, we use PCMCI to uncover meaningful cause-and-effect relationships in financial data. Our goal is to build forecasting models that are both more interpretable and more robust.
-      </p>
-    </section>
-
-    <section id="data">
-      <h2>Data</h2>
-      <p>
-        This study uses a wide range of financial and macroeconomic data from 2000 onward.
-        We collected data from the following three categories.
-      </p>
-
-      <h3>1. Macroeconomic Indicators (FRED)</h3>
+  <div class="container">
+    <nav class="sidebar">
       <ul>
-        <li>Unemployment rate</li>
-        <li>Inflation</li>
-        <li>Policy interest rate</li>
-        <li>GDP</li>
-        <li>Yield curve spread</li>
-        <li>TED spread</li>
-        <li>Market volatility index (VIX)</li>
-        <li>Credit spread</li>
+        <li><a href="#abstract">Abstract</a></li>
+        <li><a href="#introduction">Introduction</a></li>
+        <li><a href="#methods">Methods</a></li>
+        <li><a href="#interactive-graph">Interactive Graph</a></li>
+        <li><a href="#results">Results</a></li>
+        <li><a href="#conclusion">Conclusion</a></li>
       </ul>
+    </nav>
 
-      <h3>2. Financial Assets and Sector Data (Yahoo Finance)</h3>
-      <ul>
-        <li>Crude oil and gold futures</li>
-        <li>S&amp;P 500 index</li>
-        <li>Energy, financial, and technology sector ETFs</li>
-        <li>10-year Treasury yield</li>
-      </ul>
+    <main class="content">
+      <section id="abstract">
+        <h2>Abstract</h2>
+        <p>
+          Our project deals with causal analysis processes and specializes in specific domain knowledge, in our case: the financial industry. Financial time series data is characterized by high complexity, dimensionality, and nonstationarity. Traditional correlation-based models in causal analysis often fail to identify true causal drivers versus spurious associations, leading to overfitting and poor generalization. 
+        </p>
+        <p>
+          We implement a domain-specific causal discovery pipeline utilizing the PCMCI algorithm to identify causal links in financial industry data. By comparing a "naive baseline" causal discovery approach to a "domain-specialized" approach, we demonstrate improved performance on real financial industry datasets. Our specialized pipeline incorporates optimization for time lags, significance levels, and constraints for stationarity. Our results show a reduction in spurious predictors and significant improvement in predictive error on unseen test data.
+        </p>
+      </section>
 
-      <h3>3. Exchange Rate Data (Alpha Vantage)</h3>
-      <ul>
-        <li>USD/EUR</li>
-        <li>USD/KRW</li>
-        <li>USD/CAD</li>
-      </ul>
+      <section id="introduction">
+        <h2>1. Introduction</h2>
+        <p>
+          The main issue with causal relation analysis is the identification of spurious correlations, especially in the context of the financial domain. In a macroeconomic environment, asset prices and rates often move together not as a result of causal relationships, but rather because they have common underlying confounders. 
+        </p>
+        <p>
+          Current standard feature selection methodologies often fail to identify true causal relationships from spurious correlations. This in turn creates predictive models that perform well on the training data but fail on unseen data. Our project proposes a pipeline that utilizes Tigramite's PCMCI algorithm—a causal discovery algorithm that works well for time series data—to create causal graphs. Our main goal is to demonstrate that by filtering out "instantaneous" noise and using "lagged" causality, we are able to build a linear regression model that is simpler, more interpretable, and performs better than a baseline model.
+        </p>
+      </section>
 
-      <p> All data were aligned and merged on a daily basis. For time-series causal analysis, price data were transformed into log returns, while rate and indicator data were transformed using first differences.</p>
+      <section id="methods">
+        <h2>2. Methods</h2>
+        
+        <h3>2.1 Acquiring Financial Datasets</h3>
+        <p>To acquire our financial domain datasets, we utilized two openly available APIs to scrape data dating from 2000 to 2025:</p>
+        <ul>
+          <li><strong>Federal Reserve Economic Data (FRED):</strong> Unemployment rate, inflation, policy interest rate, GDP, yield curve spread, TED spread, market volatility index (VIX), and credit spread.</li>
+          <li><strong>Yahoo Finance:</strong> Crude oil futures (CL=F), gold futures (GC=F), S&P 500 index (^GSPC), energy index (XLE), financials (XLF), technology (XLK), and 10-year Treasury yields (^TNX).</li>
+        </ul>
 
-      <p>Through this process, we constructed an integrated time-series network representing interactions across the financial system.</p>
-    </section>
+        <h3>2.2 Data Preparation & Stationarity</h3>
+        <p>
+          Initial attempts at causal relation analysis using raw financial data resulted in a heavily saturated graph where nearly every variable seemed causally linked. This was due to the raw data violating the Stationarity Assumption required by the causal analysis independence test. To resolve this, we transformed the data: taking the log of returns for asset prices to prevent heteroscedasticity, and taking simple differences for rates and spreads.
+        </p>
 
-    <section id="methods">
-      <h2>Methods</h2>
+        <h3>2.3 Causal Discovery (PCMCI)</h3>
+        <p>
+          We compared two variations of the PCMCI algorithm using the ParCorr conditional independence test:
+        </p>
+        <ul>
+          <li><strong>Baseline Model:</strong> Default hyperparameter settings (Tau=5, Alpha=0.05).</li>
+          <li><strong>Specialized Model:</strong> Domain-optimized settings (Tau=2, Alpha=0.01) designed to reduce false positives and capture specific lagged causalities without introducing noise.</li>
+        </ul>
+      </section>
 
-      <h3>
-        1. Data Preprocessing
-      </h3>
+      <section id="interactive-graph">
+        <h2>3. Interactive Causal Graphs</h2>
+        <p>Explore the difference between the baseline parameters and our optimized, specialized parameters. The baseline graph suffers from high saturation (many spurious correlations), while the specialized graph correctly filters noise to show targeted lagged causality.</p>
+        
+        <div class="controls">
+          <button id="btn-baseline" class="toggle-btn active" onclick="drawGraph('baseline')">Baseline (Tau=5, Alpha=0.05)</button>
+          <button id="btn-specialized" class="toggle-btn" onclick="drawGraph('specialized')">Specialized (Tau=2, Alpha=0.01)</button>
+        </div>
+        
+        <div id="network-container"></div>
+      </section>
 
-      <h3>
-        2. Estimating Causal Memory
-      </h3>
+      <section id="results">
+        <h2>4. Results & Discussion</h2>
+        <p>
+          Running the baseline PCMCI algorithm (Alpha=0.05, Lag=5) resulted in an excessively dense causal graph, picking up general market growth rather than distinct dependencies. By heavily tightening our significance threshold (Alpha=0.01) and restricting the maximum lag based on domain knowledge (Tau=2), the Domain-Specialized PCMCI achieved a significant reduction in spurious predictors. 
+        </p>
+        <p>
+          This specialization allowed us to identify fundamental drivers—such as crude oil futures directly driving the Energy Select Sector (XLE) and Fed Funds rates impacting the 10-year treasury yield—while avoiding the overfitting trap seen in the naive baseline approach.
+        </p>
+      </section>
 
-      <h3>
-        3. hyperparameter Optimization
-      </h3>
+      <section id="conclusion">
+        <h2>5. Conclusion</h2>
+        <p>
+          We summarize our key findings by emphasizing the importance of careful hyperparameter selection and domain knowledge in financial causal discovery. The optimized pipeline produces dynamic causal graphs (DCGs) that are far more interpretable for macroeconomic environments and result in out-of-sample predictive models that generalize reliably.
+        </p>
+      </section>
+    </main>
+  </div>
 
-      <h3>
-        4. Baseline vs Specialized PCMCI
-      </h3>
-
-      <h3>
-        5. Causal Feature Extraction
-      </h3>
-
-      <h3>
-        6. Regression Evaluation
-      </h3>
-
-      <p>
-        <!-- Placeholder -->
-        Our methodology is based on the Causal Copilot framework, with a focus on
-        PCMCI and its specialized variants. Details coming soon.
-      </p>
-    </section>
-
-    <section id="results">
-      <h2>Results</h2>
-      <p>
-        <!-- Placeholder -->
-        Results and visualizations will be added after applying causal discovery
-        to real-world datasets.
-      </p>
-    </section>
-
-    <section id="discussion">
-      <h2>Discussion</h2>
-      <p>
-        <!-- Placeholder-->
-        We interpret the discovered causal structure, examine its predictive implications, and discuss limitations.
-      </p>
-    </section>
-
-    <section id="conclusion">
-      <h2>Conclusion</h2>
-      <p>
-        <!-- Placeholder -->
-        We summarize our key findings and emphasize the importance of careful hyperparameter selection and domain knowledge in financial causal discovery.
-      </p>
-    </section>
-
-    <section id="team">
-      <h2>Meet the Team</h2>
-      <ul>
-        <li>David</li>
-        <li>Laura</li>
-        <li>Yujin</li>
-      </ul>
-    </section>
-
-  </main>
-
-  <!-- Footer -->
   <footer>
-    <p>DSC 180 Capstone Project · UC San Diego</p>
+    <p>DSC 180 Capstone Project · UC San Diego · 2026</p>
   </footer>
 
+  <script src="script.js"></script>
 </body>
 </html>
-
-
