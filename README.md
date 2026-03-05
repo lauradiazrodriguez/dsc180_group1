@@ -1,4 +1,4 @@
-# DSC180A Project — Causal Discovery in Financial Systems via Domain-Specialized PCMCI
+# DSC180 Project — Causal Discovery in Financial Systems via Domain-Specialized PCMCI
 
 This project builds on the *Causal Copilot* framework to explore how causal discovery methods behave in both controlled synthetic settings and real-world financial time-series data.
 
@@ -55,7 +55,8 @@ We focus on **PCMCI (Peter–Clark Momentary Conditional Independence)**, a time
 Implemented in:
 
 ```bash
-Financial_Domain_Specialization.ipynb
+Initial_EDA_and_Optimization.ipynb
+Empirical_Testing.ipynb
 ```
 
 ### What this notebook does
@@ -85,7 +86,8 @@ We test whether discovered relationships remain useful when predicting on data f
 
 - `generating_simulated_data.ipynb` — synthetic data generation  
 - `PC_alg.ipynb` — baseline PC algorithm experiments  
-- `Financial_Domain_Specialization.ipynb` — financial PCMCI analysis  
+- `Initial_EDA_and_Optimization.ipynb` — financial data integration and exploratory analysis
+- `Empirical_Testing.ipynb` - PCMCI-based empirical analysis on financial time-series data 
 
 ---
 
@@ -95,7 +97,8 @@ To ensure reproducibility, we provide a minimal Docker environment that supports
 
 - `generating_simulated_data.ipynb`
 - `PC_alg.ipynb`
-- `Financial_Domain_Specialization.ipynb`
+- `Initial_EDA_and_Optimization.ipynb`
+- `Empirical_Testing.ipynb`
 
 ---
 
@@ -139,7 +142,8 @@ Open and execute:
 ```
 - generating_simulated_data.ipynb
 - PC_alg.ipynb
-- Financial_Domain_Specialization.ipynb
+- Initial_EDA_and_Optimization.ipynb
+- Empirical_Testing.ipynb
 ```
 
 The simulation notebook will automatically create timestamped output folders under:
@@ -159,17 +163,26 @@ The PC algorithm notebook will:
 ![Figure 2: DAG comparison for simple linear gaussian dataset](figures/DAG.png)
 
 
-The PCMCI fine-tuned analysis notebook contains the primary Quarter 2 contribution: domain-specialized causal discovery on financial time-series data.
+The financial causal discovery analysis is implemented across two notebooks:
+```
+- Initial_EDA_and_Optimization.ipynb
+- Empirical_Testing.ipynb
+```
 
-It will:
+`Initial_EDA_and_Optimization.ipynb`:
 
-- Integrate real financial and macroeconomic datasets  
-- Apply the PCMCI algorithm for time-series causal discovery  
-- Tune hyperparameters such as lag depth and significance thresholds  
-- Compare discovered relationships to domain-knowledge graphs  
-- Evaluate robustness by testing predictive performance across different time segments  
+- Integrates financial and macroeconomic dataset
+- Performs exploratory analysis
+- Tunes PCMCI hyperparameters
+- Identifies meaningful causal relationships
 
-This notebook demonstrates how causal discovery can be adapted for real-world domains where ground truth is unknown and temporal dynamics matter.
+`Empirical_Testing.ipynb`:
+
+- Tests the discovered causal structures
+- Evaluates robustness across different time segments
+- Assesses predictive usefulness of the discovered relationships 
+
+Theses notebooks demonstrate how causal discovery can be adapted for real-world domains where ground truth is unknown and temporal dynamics matter.
 ---
 
 ## 4. Exiting the Container
@@ -179,13 +192,6 @@ To exit the running container:
 ```bash
 exit
 ```
-
----
-
-# Additional Notes
-
-- This repository currently includes only the dependencies required for Quarter 1 deliverables.
-- Full LaTeX, GPU, and advanced Causal Copilot tooling will be added in future project phases.
 
 ---
 
@@ -250,7 +256,7 @@ These packages are sufficient to run:
 
 - Synthetic data generation  
 - PC algorithm experiments  
-- Financial-domain PCMCI specialization and robustness testing  
+- Financial time-series causal discovery analysis 
 
 No additional local setup is required beyond Docker.
 
