@@ -33,8 +33,8 @@
   <div class="container">
     <nav class="sidebar">
       <ul>
-        <li><a href="#abstract">Abstract</a></li>
         <li><a href="#introduction">Introduction</a></li>
+        <li><a href="#data">Data</a></li>
         <li><a href="#methods">Methods</a></li>
         <li><a href="#interactive-graph">Interactive Graph</a></li>
         <li><a href="#results">Results</a></li>
@@ -43,54 +43,88 @@
     </nav>
 
     <main class="content">
-      <section id="abstract">
-        <h2>Abstract</h2>
+      <section id="introduction">
+        <h2>Introduction</h2>
         <p>
-          Our project deals with causal analysis processes and specializes in specific domain knowledge, in our case: the financial industry. Financial time series data is characterized by high complexity, dimensionality, and nonstationarity. Traditional correlation-based models in causal analysis often fail to identify true causal drivers versus spurious associations, leading to overfitting and poor generalization. 
+          Many variables in financial markets move together. However, these patterns do not necessarily imply causal relationships. In many cases, multiple variables change simultaneously due to shared underlying factors.
         </p>
         <p>
-          We implement a domain-specific causal discovery pipeline utilizing the PCMCI algorithm to identify causal links in financial industry data. By comparing a "naive baseline" causal discovery approach to a "domain-specialized" approach, we demonstrate improved performance on real financial industry datasets. Our specialized pipeline incorporates optimization for time lags, significance levels, and constraints for stationarity. Our results show a reduction in spurious predictors and significant improvement in predictive error on unseen test data.
+          Because of this, simple correlation-based feature selection can easily include spurious predictors. Models built on these relationships may perform well on training data but fail to generalize to unseen data.
+        </p>
+        <p>
+          In this project, we explore whether causal discovery methods can identify more meaningful predictors in financial time-series data. Using the PCMCI algorithm, we focus on lagged causal relationships while filtering out instantaneous noise. This allows us to build a regression model that is simpler, more interpretable, and more robust than a naive baseline model.
         </p>
       </section>
 
-      <section id="introduction">
-        <h2>1. Introduction</h2>
+      <section id="data">
+        <h2>Data</h2>
         <p>
-          The main issue with causal relation analysis is the identification of spurious correlations, especially in the context of the financial domain. In a macroeconomic environment, asset prices and rates often move together not as a result of causal relationships, but rather because they have common underlying confounders. 
+          Our dataset combines macroeconomic indicators and financial market variables collected from two public data sources. The data spans from 2000 to 2025, capturing long-term economic conditions and market dynamics.
         </p>
+
+        <h3>Macroeconomic Variables (FRED)</h3>
+        <ul>
+        <li>Unemployment Rate (UNRATE)</li>
+        <li>Consumer Price Index – Inflation (CPIAUCSL)</li>
+        <li>Federal Funds Rate (FEDFUNDS)</li>
+        <li>Yield Curve Spread (T10Y2Y)</li>
+        <li>Market Volatility Index – VIX (VIXCLS)</li>
+        <li>High Yield Credit Spread (BAMLH0A0HYM2)</li>
+        </ul>
+
+        <h3>Market Variables (Yahoo Finance)</h3>
+        <ul>
+        <li>Crude Oil Futures (CL=F)</li>
+        <li>Gold Futures (GC=F)</li>
+        <li>Energy Sector ETF (XLE)</li>
+        <li>Technology Sector ETF (XLK)</li>
+        <li>Financial Sector ETF (XLF)</li>
+        <li>S&amp;P 500 Index (^GSPC)</li>
+        <li>10-Year Treasury Yield (^TNX)</li>
+        </ul>
+
         <p>
-          Current standard feature selection methodologies often fail to identify true causal relationships from spurious correlations. This in turn creates predictive models that perform well on the training data but fail on unseen data. Our project proposes a pipeline that utilizes Tigramite's PCMCI algorithm—a causal discovery algorithm that works well for time series data—to create causal graphs. Our main goal is to demonstrate that by filtering out "instantaneous" noise and using "lagged" causality, we are able to build a linear regression model that is simpler, more interpretable, and performs better than a baseline model.
+          These variables capture both macroeconomic conditions and financial market activity, allowing us to analyze causal relationships across different parts of the financial system.
         </p>
       </section>
 
       <section id="methods">
-        <h2>2. Methods</h2>
+        <h2>Methods</h2>
         
-        <h3>2.1 Acquiring Financial Datasets</h3>
-        <p>To acquire our financial domain datasets, we utilized two openly available APIs to scrape data dating from 2000 to 2025:</p>
-        <ul>
-          <li><strong>Federal Reserve Economic Data (FRED):</strong> Unemployment rate, inflation, policy interest rate, GDP, yield curve spread, TED spread, market volatility index (VIX), and credit spread.</li>
-          <li><strong>Yahoo Finance:</strong> Crude oil futures (CL=F), gold futures (GC=F), S&P 500 index (^GSPC), energy index (XLE), financials (XLF), technology (XLK), and 10-year Treasury yields (^TNX).</li>
-        </ul>
-
-        <h3>2.2 Data Preparation & Stationarity</h3>
+        <h3>Data Preparation & Stationarity</h3>
         <p>
-          Initial attempts at causal relation analysis using raw financial data resulted in a heavily saturated graph where nearly every variable seemed causally linked. This was due to the raw data violating the Stationarity Assumption required by the causal analysis independence test. To resolve this, we transformed the data: taking the log of returns for asset prices to prevent heteroscedasticity, and taking simple differences for rates and spreads.
+          Financial time-series often exhibit strong trends that violate the stationarity assumption required for causal discovery. To address this issue, price series were transformed into log returns to stabilize the mean and variance over time. All variables were then standardized to place them on comparable scales and ensure reliable statistical testing in the PCMCI causal discovery pipeline.
         </p>
 
-        <h3>2.3 Causal Discovery (PCMCI)</h3>
+        <h3>Chronological Train-Test Split</h3>
         <p>
-          We compared two variations of the PCMCI algorithm using the ParCorr conditional independence test:
+          Because financial time-series data are inherently time-ordered, we used a chronological train–test split rather than random sampling. Random shuffling can introduce data leakage by allowing future observations to influence past predictions. Using a chronological split ensures that the model is trained only on past observations and evaluated on future data.
         </p>
-        <ul>
-          <li><strong>Baseline Model:</strong> Default hyperparameter settings (Tau=5, Alpha=0.05).</li>
-          <li><strong>Specialized Model:</strong> Domain-optimized settings (Tau=2, Alpha=0.01) designed to reduce false positives and capture specific lagged causalities without introducing noise.</li>
-        </ul>
+
+        <h3>Causal Discovery using PCMCI</h3>
+        <p>
+          To discover causal relationships between financial variables, we applied the PCMCI algorithm from the Tigramite framework. PCMCI is designed for time-series data and identifies causal links while accounting for lagged dependencies between variables, allowing the model to distinguish meaningful temporal relationships from simple correlations.
+        </p>
+
+        <h3>Hyperparameter Optimization</h3>
+        <p>
+          We optimized key PCMCI parameters including the maximum time lag and significance threshold. An elbow-style analysis of partial correlation strength across time lags suggested that most causal influence occurs within one day. We then conducted a grid search over multiple parameter combinations and evaluated their performance using regression models and test mean squared error.
+        </p>
       </section>
 
       <section id="interactive-graph">
-        <h2>3. Interactive Causal Graphs</h2>
-        <p>Explore the difference between the baseline parameters and our optimized, specialized parameters. The baseline graph suffers from high saturation (many spurious correlations), while the specialized graph correctly filters noise to show targeted lagged causality.</p>
+        <h2>Interactive Causal Graphs</h2>
+        <P>
+          Explore the difference between the baseline PCMCI configuration and our domain-specialized parameters. The baseline graph suffers from high saturation, producing many spurious correlations, while the specialized graph filters noise to highlight targeted lagged causal relationships.
+        </P>
+        <p>
+          We compare two variations of the PCMCI algorithm using the ParCorr conditional independence test:
+        </p>
+        <ul>
+        <li><strong>Baseline Model:</strong> Default hyperparameter settings (Tau = 5, Alpha = 0.05).</li>
+
+        <li><strong>Domain-Specialized Model:</strong> Domain-informed parameters (Tau = 2, Alpha = 0.01) designed to reduce false positives and capture meaningful lagged causal dependencies.</li>
+        </ul>
         
         <div class="controls">
           <button id="btn-baseline" class="toggle-btn active" onclick="drawGraph('baseline')">Baseline (Tau=5, Alpha=0.05)</button>
@@ -101,7 +135,7 @@
       </section>
 
       <section id="results">
-        <h2>4. Results & Discussion</h2>
+        <h2>Results & Discussion</h2>
         <p>
           Running the baseline PCMCI algorithm (Alpha=0.05, Lag=5) resulted in an excessively dense causal graph, picking up general market growth rather than distinct dependencies. By heavily tightening our significance threshold (Alpha=0.01) and restricting the maximum lag based on domain knowledge (Tau=2), the Domain-Specialized PCMCI achieved a significant reduction in spurious predictors. 
         </p>
@@ -111,7 +145,7 @@
       </section>
 
       <section id="conclusion">
-        <h2>5. Conclusion</h2>
+        <h2>Conclusion</h2>
         <p>
           We summarize our key findings by emphasizing the importance of careful hyperparameter selection and domain knowledge in financial causal discovery. The optimized pipeline produces dynamic causal graphs (DCGs) that are far more interpretable for macroeconomic environments and result in out-of-sample predictive models that generalize reliably.
         </p>
