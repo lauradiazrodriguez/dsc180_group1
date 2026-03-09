@@ -14,6 +14,8 @@ window.complexityChart = new Chart(ctx1, {
     }]
   },
   options: {
+    responsive: true,
+    maintainAspectRatio: false,
     plugins:{
         legend:{
             display: false
@@ -40,6 +42,8 @@ window.mseChart = new Chart(ctx2, {
     }]
   },
   options: {
+    responsive: true,
+    maintainAspectRatio: false,
     plugins:{
         legend:{
             display: false

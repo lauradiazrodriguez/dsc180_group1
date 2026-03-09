@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Causal Discovery in Financial Systems</title>
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -12,6 +12,7 @@
   <script type="text/javascript" src="https://unpkg.com/vis-network/standalone/umd/vis-network.min.js"></script>
   
   <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="charts.css" />
 </head>
 <body>
 
@@ -144,7 +145,7 @@
         </p>
 
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-        <script src="Chart.js"></script>
+        <script src="chart.js"></script>
 
         <h3>Model Complexity (Predictors)</h3>
 
@@ -154,9 +155,11 @@
           </button>
         </div>
 
-        <div style="width:700px; margin:auto;">
+
+        <div class="chart-container">
           <canvas id="complexityChart"></canvas>
         </div>
+
         <p>
           To evaluate the usefulness of the discovered causal structures, we used the identified parent variables as predictors in downstream linear regression models. Across the 13 financial variables analyzed, the baseline configuration identified an average of <b>17.5 predictors</b> per target variable. In contrast, the domain-specialized model reduced this to only <b>3.8 predictors</b> on average.
         </p>
@@ -172,7 +175,7 @@
           </button>
         </div>
 
-        <div style="width:700px; margin:auto;">
+        <div class="chart-container">
           <canvas id="mseChart"></canvas>
         </div>
         <p>
