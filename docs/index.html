@@ -137,10 +137,49 @@
       <section id="results">
         <h2>Results & Discussion</h2>
         <p>
-          Running the baseline PCMCI algorithm (Alpha=0.05, Lag=5) resulted in an excessively dense causal graph, picking up general market growth rather than distinct dependencies. By heavily tightening our significance threshold (Alpha=0.01) and restricting the maximum lag based on domain knowledge (Tau=2), the Domain-Specialized PCMCI achieved a significant reduction in spurious predictors. 
+          The baseline PCMCI configuration (Alpha = 0.05, Tau = 5) produced a highly saturated causal graph that primarily reflected general market co-movement rather than clear causal relationships. As the lag window increased, training error decreased while test error increased, indicating clear signs of overfitting.
         </p>
         <p>
-          This specialization allowed us to identify fundamental drivers—such as crude oil futures directly driving the Energy Select Sector (XLE) and Fed Funds rates impacting the 10-year treasury yield—while avoiding the overfitting trap seen in the naive baseline approach.
+          To address this issue, we applied domain-informed parameter tuning to the causal discovery process. By restricting the time lag and relaxing the significance threshold (Tau = 1, Alpha = 0.2), the domain-specialized PCMCI model produced significantly cleaner causal graphs with far fewer spurious relationships.
+        </p>
+
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <script src="Chart.js"></script>
+
+        <h3>Model Complexity (Predictors)</h3>
+
+        <div class="controls">
+          <button id="btn-complexity" class="toggle-btn active" onclick="showComplexity()">
+            Show Specialized
+          </button>
+        </div>
+
+        <div style="width:700px; margin:auto;">
+          <canvas id="complexityChart"></canvas>
+        </div>
+        <p>
+          To evaluate the usefulness of the discovered causal structures, we used the identified parent variables as predictors in downstream linear regression models. Across the 13 financial variables analyzed, the baseline configuration identified an average of <b>17.5 predictors</b> per target variable. In contrast, the domain-specialized model reduced this to only <b>3.8 predictors</b> on average.
+        </p>
+        <p>
+          This substantial reduction in predictors reflects a much simpler and more interpretable causal structure. By incorporating domain knowledge into the causal discovery process, the model was able to filter out many spurious relationships that appeared in the baseline configuration.
+        </p>
+
+        <h3 style="margin-top:50px;">Prediction Error (MSE)</h3>
+
+        <div class="controls">
+          <button id="btn-mse" class="toggle-btn active" onclick="showMSE()">
+            Show Specialized
+          </button>
+        </div>
+
+        <div style="width:700px; margin:auto;">
+          <canvas id="mseChart"></canvas>
+        </div>
+        <p>
+          Despite using far fewer predictors, the specialized model achieved slightly better predictive performance. The baseline configuration produced an out-of-sample MSE of <b>0.895</b>, while the specialized model achieved a lower MSE of <b>0.877</b>.
+        </p>
+        <p>
+          Overall, the domain-specialized model improved predictive performance by approximately <b>2%</b> while using substantially fewer predictors. This result suggests that incorporating domain knowledge into causal discovery can both simplify the resulting graph structure and improve downstream predictive modeling.
         </p>
       </section>
 
