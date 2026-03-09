@@ -55,8 +55,9 @@ We focus on **PCMCI (Peter–Clark Momentary Conditional Independence)**, a time
 Implemented in:
 
 ```bash
-Initial_EDA_and_Optimization.ipynb
-Empirical_Testing.ipynb
+Q2_1_Data_Scraping.ipynb
+Q2_2_Initial_EDA_and_Optimization.ipynb
+Q2_3_Empirical_Testing.ipynb
 ```
 
 ### What this notebook does
@@ -84,21 +85,17 @@ We test whether discovered relationships remain useful when predicting on data f
 
 # Main Notebooks
 
-- `generating_simulated_data.ipynb` — synthetic data generation  
-- `PC_alg.ipynb` — baseline PC algorithm experiments  
-- `Initial_EDA_and_Optimization.ipynb` — financial data integration and exploratory analysis
-- `Empirical_Testing.ipynb` - PCMCI-based empirical analysis on financial time-series data 
+- `Q1_1_generating_simulated_data.ipynb` — synthetic data generation  
+- `Q1_2_PC_alg.ipynb` — baseline PC algorithm experiments  
+- `Q2_1_Data_Scraping.ipynb` — financial data scraping fron APIs
+- `Q2_2_Initial_EDA_and_Optimization.ipynb` — financial data integration and exploratory analysis
+- `Q2_3_Empirical_Testing.ipynb` - PCMCI-based empirical analysis on financial time-series data 
 
 ---
 
 # Running the Project Using Docker
 
-To ensure reproducibility, we provide a minimal Docker environment that supports the dependencies required for:
-
-- `generating_simulated_data.ipynb`
-- `PC_alg.ipynb`
-- `Initial_EDA_and_Optimization.ipynb`
-- `Empirical_Testing.ipynb`
+To ensure reproducibility, we provide a minimal Docker environment that supports the dependencies required for the above notebooks:
 
 ---
 
@@ -140,10 +137,11 @@ http://localhost:8888
 Open and execute:
 
 ```
-- generating_simulated_data.ipynb
-- PC_alg.ipynb
-- Initial_EDA_and_Optimization.ipynb
-- Empirical_Testing.ipynb
+- Q1_1_generating_simulated_data.ipynb
+- Q1_2_PC_alg.ipynb
+- Q2_1_Data_Scraping.ipynb
+- Q2_2_Initial_EDA_and_Optimization.ipynb
+- Q2_3_Empirical_Testing.ipynb
 ```
 
 The simulation notebook will automatically create timestamped output folders under:
@@ -165,18 +163,18 @@ The PC algorithm notebook will:
 
 The financial causal discovery analysis is implemented across two notebooks:
 ```
-- Initial_EDA_and_Optimization.ipynb
-- Empirical_Testing.ipynb
+- Q2_2_Initial_EDA_and_Optimization.ipynb
+- Q2_3_Empirical_Testing.ipynb
 ```
 
-`Initial_EDA_and_Optimization.ipynb`:
+`Q2_2_Initial_EDA_and_Optimization.ipynb`:
 
 - Integrates financial and macroeconomic dataset
 - Performs exploratory analysis
 - Tunes PCMCI hyperparameters
 - Identifies meaningful causal relationships
 
-`Empirical_Testing.ipynb`:
+`Q2_3_Empirical_Testing.ipynb`:
 
 - Tests the discovered causal structures
 - Evaluates robustness across different time segments
